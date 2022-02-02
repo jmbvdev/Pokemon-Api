@@ -17,6 +17,7 @@ const PokemonInfo = ({url}) => {
 
         <Link to={`/pokemons/${pokemon.id}`}>
             {pokemon.name}
+            <img src={pokemon.sprites?.front_default} alt="" />
         </Link>
 
     );
