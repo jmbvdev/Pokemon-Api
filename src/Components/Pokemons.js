@@ -5,6 +5,11 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import PokemonInfo from './PokemonInfo';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+
+
 
 const Pokemons = () => {
 
@@ -31,11 +36,18 @@ const Pokemons = () => {
     }
    
     const search=()=>navigate(`/pokemons/${pokemonSearched}`)
+    const home=()=> navigate(`/`)
+
+    
+   
 
     return (
-        <div>
-            <h1>Welcome {name}!</h1>
+        <div className='container'>
+            <button className='navigation-home' onClick={home}><i> <FontAwesomeIcon icon={faHome}/></i> </button>
+            <h2 className='title'>Pokedex</h2>
+            <p className='title-pokedex'>Welcome {name}!, here you can find your favorite pokemon</p>
             <select onChange={e=> filteredPokemons(e.target.value)}>
+                <option value="" >All types</option>
             {
                     types.map(type=>(
                         <option key={type.url} value={type.url}>
@@ -44,20 +56,22 @@ const Pokemons = () => {
                     ))
             }
             </select>
-            <input type="text" value={pokemonSearched} onChange={e=>setPokemonSearched(e.target.value)}/>
-            <button onClick={search}>submit</button>
+            <input  placeholder="Search Here..." type="text" value={pokemonSearched} onChange={e=>setPokemonSearched(e.target.value)}/>
+            <button className='search-icon' onClick={search}><i ><FontAwesomeIcon icon={faSearch}/></i></button>
           
-            
-            <ul>
+            <div>
+            <ul className='container-card' >
                 {
                     pokemons.map(pokemon=>(
-                        <li key={pokemon.url ? pokemon.url: pokemon.pokemon.url}>
+                        <li className='row-list' key={pokemon.url ? pokemon.url: pokemon.pokemon.url}>
                             <PokemonInfo url={pokemon.url ? pokemon.url: pokemon.pokemon.url}/>
                         </li>
 
                     ))
                 }
             </ul>
+
+            </div>
         </div>
     );
 };

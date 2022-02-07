@@ -9,6 +9,7 @@ import TrainerName from './Components/TrainerName';
 function App() {
   return (
     <HashRouter>
+       <div className='pokeball'></div>
       <Routes>
         <Route path="/" element={<TrainerName/>}/>
         <Route element={<ProtectedRoutes/>}>
